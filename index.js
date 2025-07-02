@@ -7,28 +7,30 @@
 
 const inputUserString = prompt("Введіть рядок:");
 const inputCharsToDelete = prompt("Введіть символи, які потрібно видалити");
+let result = "";
 
-removeChars(inputUserString, inputCharsToDelete);
+if (inputUserString !== null && inputUserString.trim() !== "") {
+  const trimmedInput = inputUserString.trim();
 
+  if (inputCharsToDelete !== null && inputCharsToDelete.length > 0) {
+    const charsArray = inputCharsToDelete.split("");
+
+    result = removeChars(trimmedInput, charsArray);
+  } else {
+    result = trimmedInput;
+  }
+  alert("Результат: " + result);
+} else {
+  alert("Введення скасовано або рядок порожній.");
+}
 
 function removeChars(str, charsToRemove) {
-  let result = "";
-  if (str !== null && str.trim() !== "") {
-    const trimmedInput = str.trim();
+  let filteredString = "";
 
-    if (charsToRemove !== null && charsToRemove.length > 0) {
-      const charsArray = charsToRemove.split("");
-
-      for (let i = 0; i < trimmedInput.length; i++) {
-        if (!charsArray.includes(trimmedInput[i])) {
-          result += trimmedInput[i];
-        }
-      }
-    } else {
-      result = trimmedInput;
+  for (let i = 0; i < str.length; i++) {
+    if (!charsToRemove.includes(str[i])) {
+      filteredString += str[i];
     }
-    alert("Результат: " + result);
-  } else {
-    alert("Введення скасовано або рядок порожній.");
   }
+  return filteredString;
 }
